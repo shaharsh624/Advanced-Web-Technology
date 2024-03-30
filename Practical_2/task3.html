@@ -1,0 +1,2787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>UI designer Html Code Example</title>
+    <link rel="shortcut icon" href="//csite.nicepage.com/favicon.ico" type="image/x-icon">
+    <meta charset="utf-8" />
+    <meta name="Keywords" content=" ">
+    <meta name="Description"
+        content="UI designer. Professional Html Code Example. Responsive, fully customizable with easy Drag-n-Drop editor. You can use it for subjects like crafting, effective, men, isolated, adult. Categories: Art & Design, Split.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nicepage.com/hc/1467028/ui-designer-html-code">
+    <meta property="og:title" content="UI designer Html Code Example">
+    <meta property="og:image"
+        content="https://images01.nicepagecdn.com/page/14/67/html-template-1467028.jpg?version=3d3da141-cdac-4fa3-a790-61898900f223">
+    <meta property="og:description"
+        content="UI designer. Professional Html Code Example. Responsive, fully customizable with easy Drag-n-Drop editor. You can use it for subjects like crafting, effective, men, isolated, adult. Categories: Art & Design, Split.">
+    <meta property="og:site_name" content="Nicepage.com" />
+
+
+    <link rel="preload" href="https://images01.nicepagecdn.com/page/14/67/html-code-preview-1467028.webp" as="image"
+        type="image/webp" media="(min-width: 451px)">
+
+
+
+
+
+
+
+
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no,width=device-width">
+    <link href="//fonts.googleapis.com/css?family=Roboto|Open+Sans:200,300,400,700,800,900&amp;subset=latin"
+        rel="preload" as="font" />
+
+
+
+
+
+    <script>
+        window.isAuthenticated = 0;
+        window.clientUserId = 0;
+        window.clientUserName = '';
+        window.userCountryCode = '';
+        window.logPageEvent = 1;
+        window.userHasAdsParams = 1;
+        window.utmSourceFromReferrer = 1;
+        window.currentLang = '';
+        window.baseUrl = 'html-code';
+        window.currentUrl = '';
+        window.np_userId = '';
+        window.isAmplitudeInitialized = false;
+        window.sha256Email = '';
+
+        function sendAnalyticsData(eventType, props, cb) {
+            var json = { data: {} };
+            json.userToken = np_userId;
+            json.data.adsParams = $.cookie('AdsParameters');
+            json.data.ga = $.cookie('_ga');
+            json.data.gac = $.cookie('_gac_UA-88868916-2');
+            json.data.userAgent = navigator.userAgent;
+            json.data.eventType = eventType;
+            json.data.props = props;
+            $.ajax({
+                'type': 'POST',
+                'url': '/Feedback/SendAdsLog',
+                'contentType': 'application/json; charset=utf-8',
+                'data': JSON.stringify(json),
+                'dataType': 'json',
+                'complete': cb || function () { }
+            });
+        }
+
+        function initializeAmplitudeUser() {
+            if (isAmplitudeInitialized) {
+                return;
+            }
+            isAmplitudeInitialized = true;
+
+            if (clientUserId > 0) {
+                identifyAmplitudeUser(clientUserId, clientUserName);
+            }
+            else {
+                identifyAmplitudeUser(null);
+            }
+        }
+
+        function sendAmplitudeAnalyticsData(eventName, eventProperties, userProperties, callback_function) {
+            initializeAmplitudeUser();
+
+            if (userProperties) {
+                if (userProperties.utm_source || userProperties.utm_campaign) {
+                    var identify = new amplitude.Identify();
+                    identify.setOnce("utm_campaign", userProperties.utm_campaign);
+                    identify.setOnce("utm_source", userProperties.utm_source);
+                    identify.setOnce("utm_content", userProperties.utm_content);
+                    identify.setOnce("utm_term", userProperties.utm_term);
+                    identify.setOnce("utm_page", userProperties.utm_page);
+                    identify.setOnce("utm_page2", userProperties.utm_page);
+                    identify.setOnce("referrer", userProperties.referrer);
+
+                    amplitude.getInstance().identify(identify);
+
+                    userProperties.utm_source_last = userProperties.utm_source;
+                    userProperties.utm_campaign_last = userProperties.utm_campaign;
+                    userProperties.utm_content_last = userProperties.utm_content;
+                    userProperties.utm_term_last = userProperties.utm_term;
+                    userProperties.utm_page_last = userProperties.utm_page;
+                }
+
+                var userProps = objectWithoutProperties(userProperties, ["utm_campaign", "utm_source", "utm_content", "utm_term", "utm_page", "referrer"]);
+                amplitude.getInstance().setUserProperties(userProps);
+            }
+
+            if (!eventProperties) {
+                eventProperties = {};
+            }
+
+            eventProperties.WebSite = 'true';
+            eventProperties.IsAuthenticated = window.isAuthenticated;
+            eventProperties.country_code = getCountryCode();
+            eventProperties.lang = window.currentLang || '';
+
+            var fullPageUrl = window.location.pathname.split('?')[0];
+            eventProperties.full_page_url = fullPageUrl;
+            eventProperties.page_url = clearPageUrl(fullPageUrl);
+
+            if (typeof callback_function === 'function') {
+                amplitude.getInstance().logEvent(eventName, eventProperties, callback_function);
+            } else {
+                amplitude.getInstance().logEvent(eventName, eventProperties);
+            }
+        }
+
+        function identifyAmplitudeUser(userId, token) {
+            if (userId) {
+                amplitude.getInstance().setUserProperties({
+                    "Token": token,
+                    "UserId": userId
+                });
+            }
+
+            var identify = new amplitude.Identify();
+            amplitude.getInstance().identify(identify);
+            if (userId) {
+                amplitude.getInstance().setUserId(userId);
+            }
+        }
+
+        function sendAnalyticsFromUrl(referrer, pageType) {
+            var hash = window.location.hash;
+
+            var urlIsAvailable = typeof URL === "function" || (navigator.userAgent.indexOf('MSIE') !== -1 && typeof URL === 'object');
+            if (!urlIsAvailable) {
+                return;
+            }
+
+            var url = new URL(window.location.href);
+            if (hash && hash.indexOf('utm_') >= 0) {
+                url = new URL(window.location.origin + window.location.pathname + hash.replace('#', '?'));
+            }
+
+            if (!url.searchParams) {
+                return;
+            }
+
+            var utmParams = getUtmParams(url);
+            var gclidFromUrl = utmParams.gclid;
+            var utmParamsFromUrl = !!utmParams.utmSource || !!utmParams.utmCampaign || !!utmParams.gclid;
+            if (!utmParamsFromUrl && userHasAdsParams) {
+                utmParams = getUtmParamsFromCookie();
+            }
+
+            var canLog = canLogToAmplitude();
+            if (utmParamsFromUrl || utmSourceFromReferrer) {
+                var fullPageUrl = window.location.pathname.split('?')[0];
+                var pageUrl = clearPageUrl(fullPageUrl);
+                var userProps = {
+                    "utm_source": utmParams.utmSource,
+                    "utm_campaign": utmParams.utmCampaign,
+                    "utm_content": utmParams.utmContent,
+                    "utm_term": utmParams.utmTerm,
+                    "utm_page": getUtmPageValue(pageUrl),
+                    "utm_lang": window.currentLang || '',
+                    "referrer": referrer
+                };
+
+                if (gclidFromUrl) {
+                    var landingUrl = pageUrl.startsWith('/') && pageUrl !== '/' ? pageUrl.substr(1) : pageUrl;
+                    userProps.landing_page = landingUrl;
+
+                    var event = {
+                        'Page': landingUrl,
+                        'Url': window.location.href,
+                        'utm_campaign_event': utmParams.utmCampaign
+                    }
+                    sendAmplitudeAnalyticsData('Landing Page', event, userProps);
+                } else {
+                    var eventProps = {
+                        "utm_source": utmParams.utmSource,
+                        "utm_campaign": utmParams.utmCampaign,
+                        "utm_content": utmParams.utmContent,
+                        "utm_term": utmParams.utmTerm
+                    };
+
+                    if (utmParams.utmSource === "elastic") {
+                        sendAmplitudeAnalyticsData('Email Click', eventProps);
+                    }
+
+                    if (canLog) {
+                        sendAmplitudeAnalyticsData('Campaign', eventProps, userProps);
+                    }
+                }
+            }
+
+            if (logPageEvent && canLog || (pageType === 'Pricing Page' && !window.isForbiddenCountry())) {
+                var pageEventProps = {
+                    'type': pageType,
+                    'accepted_country': isValidCountry(),
+                    'force_log': !canLog
+                };
+
+                sendAmplitudeAnalyticsData('Page View', pageEventProps);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setCountryCode('https://location.nicepagesrv.com/country');
+            setUserIdCookie();
+            updatePageViewCounter();
+
+            if (typeof gtag === 'function' && typeof canSendViewConversion === 'function' && window.isAuthenticated && canSendViewConversion()) {
+                if (sha256Email) {
+                    gtag('set', 'user_data', { 'sha256_email_address': sha256Email });
+                }
+                //Event snippet for 2 Page View conversion page
+                gtag('event', 'conversion', { 'send_to': 'AW-797221335/GbWrCJ6Ht5wYENfDkvwC', 'transaction_id': clientUserId });
+
+                setAdsPageViewCookie();
+            }
+
+            var referrer = 'www.google.com';
+            var pageType = 'Block Detail Page';
+            sendAnalyticsFromUrl(referrer, pageType);
+
+            if (location.href.indexOf('/frame/') === -1) {
+                PureCookie.initCookieConsent({
+                    description: 'By using this website, you automatically accept that we use cookies. Learn more about our ',
+                    link: '<a href="https://nicepage.com/Privacy" target="_blank"> privacy and cookies policy</a>.',
+                    buttonCaption: "Accept",
+                    opacity: 0.88,
+                });
+            }
+        });
+    </script>
+
+    <!--
+<style>.async-hide { opacity: 0 !important} </style>
+<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+})(window,document.documentElement,'async-hide','dataLayer',4000,
+{'GTM-KGP3NM3':true});</script>
+--> <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-797221335"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        var options = {};
+        var awOptions = { 'allow_enhanced_conversions': true };
+        if (clientUserId > 0) {
+            options.user_id = clientUserId;
+            awOptions.user_id = clientUserId;
+        }
+        // gtag('config', 'GA_TRACKING_ID', { 'optimize_id': 'OPT_CONTAINER_ID'});
+        gtag('config', 'AW-797221335', awOptions);
+        gtag('config', 'G-T7WWB0T53W', options);
+    </script>
+    <!-- Facebook Pixel Code -->
+    <script>
+        if (window.hideFacebookPixelCode !== true) {
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq) return; n = f.fbq = function () {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+                n.queue = []; t = b.createElement(e); t.async = !0;
+                t.src = v; s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '251025992170426', {
+                em: ''
+            });
+            fbq('track', 'PageView');
+        }
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=251025992170426&ev=PageView&noscript=1" /></noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <!-- Amplitude Code -->
+    <script type="text/javascript">
+        (function (e, t) {
+            var n = e.amplitude || { _q: [], _iq: {} }; var r = t.createElement("script")
+                ; r.type = "text/javascript"
+                ; r.integrity = "sha384-d/yhnowERvm+7eCU79T/bYjOiMmq4F11ElWYLmt0ktvYEVgqLDazh4+gW9CKMpYW"
+                ; r.crossOrigin = "anonymous"; r.async = true
+                ; r.src = "https://cdn.amplitude.com/libs/amplitude-5.2.2-min.gz.js"
+                ; r.onload = function () {
+                    if (!e.amplitude.runQueuedFunctions) {
+                        console.log("[Amplitude] Error: could not load SDK")
+                    }
+                }
+                ; var i = t.getElementsByTagName("script")[0]; i.parentNode.insertBefore(r, i)
+                ; function s(e, t) {
+                    e.prototype[t] = function () {
+                        this._q.push([t].concat(Array.prototype.slice.call(arguments, 0))); return this
+                    }
+                }
+            var o = function () { this._q = []; return this }
+                ; var a = ["add", "append", "clearAll", "prepend", "set", "setOnce", "unset"]
+                ; for (var u = 0; u < a.length; u++) { s(o, a[u]) } n.Identify = o; var c = function () {
+                    this._q = []
+                    ; return this
+                }
+                ; var l = ["setProductId", "setQuantity", "setPrice", "setRevenueType", "setEventProperties"]
+                ; for (var p = 0; p < l.length; p++) { s(c, l[p]) } n.Revenue = c
+                ; var d = ["init", "logEvent", "logRevenue", "setUserId", "setUserProperties", "setOptOut", "setVersionName", "setDomain", "setDeviceId", "setGlobalUserProperties", "identify", "clearUserProperties", "setGroup", "logRevenueV2", "regenerateDeviceId", "groupIdentify", "onInit", "logEventWithTimestamp", "logEventWithGroups", "setSessionId", "resetSessionId"]
+                ; function v(e) {
+                    function t(t) {
+                        e[t] = function () {
+                            e._q.push([t].concat(Array.prototype.slice.call(arguments, 0)))
+                        }
+                    }
+                    for (var n = 0; n < d.length; n++) { t(d[n]) }
+                } v(n); n.getInstance = function (e) {
+                    e = (!e || e.length === 0 ? "$default_instance" : e).toLowerCase()
+                        ; if (!n._iq.hasOwnProperty(e)) { n._iq[e] = { _q: [] }; v(n._iq[e]) } return n._iq[e]
+                }
+                ; e.amplitude = n
+        })(window, document);
+        amplitude.getInstance().init("878f4709123a5451aff838c1f870b849");
+    </script>
+
+    <script>
+        var shareasaleSSCID = shareasaleGetParameterByName("sscid"); function shareasaleSetCookie(e, a, r, s, t) { if (e && a) { var o, n = s ? "; path=" + s : "", i = t ? "; domain=" + t : "", S = ""; r && ((o = new Date).setTime(o.getTime() + r), S = "; expires=" + o.toUTCString()), document.cookie = e + "=" + a + S + n + i + "; SameSite=None;Secure" } } function shareasaleGetParameterByName(e, a) { a || (a = window.location.href), e = e.replace(/[\[\]]/g, "\\$&"); var r = new RegExp("[?&]" + e + "(=([^&#]*)|&|#|$)").exec(a); return r ? r[2] ? decodeURIComponent(r[2].replace(/\+/g, " ")) : "" : null } shareasaleSSCID && shareasaleSetCookie("shareasaleSSCID", shareasaleSSCID, 94670778e4, "/");
+    </script>
+
+
+
+
+
+
+    <script src="//capp.nicepage.com/07dd1229f354cc43efdf670cffb8ad606fb3d949/template-detail-libs.js" defer></script>
+    <link href="//capp.nicepage.com/07dd1229f354cc43efdf670cffb8ad606fb3d949/template-detail-libs.css"
+        rel="stylesheet" />
+
+
+    <!--[if lt IE 9]>
+    <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+
+
+
+
+
+
+
+
+
+    <link rel="canonical" href="https://nicepage.com/hc/1467028/ui-designer-html-code" />
+
+    <script>
+        function sendLogToAmplitude(eventName, eventProps) {
+            if (canLogToAmplitude()) {
+                sendAmplitudeAnalyticsData(eventName, eventProps);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Click outside of the modal and close it
+            window.onclick = function (e) {
+                if ($(e.target).is('.modal')) {
+                    closeModal($(e.target));
+                }
+            };
+            // Use the escape key to close modal
+            document.onkeyup = function (e) {
+                e = e || window.event;
+                if (e.keyCode == 27 && $('.modal--show').length === 1) {
+                    closeModal($('.modal--show'));
+                }
+            };
+
+            var eventProps = { 'Route': 'html-code', 'Id': 1467028, 'PageType': 'Block Detail Page', 'Lang': '' };
+
+            var sendData = function (action, cb) {
+                if (typeof fbq === 'function') {
+                    fbq('track', 'Download');
+                }
+
+                var cbCounter = 0;
+
+                function cbWithCounter() {
+                    cbCounter++;
+                    if (cbCounter === 2 && cb) {
+                        cb();
+                    }
+                }
+
+                if (typeof sendAnalyticsData === 'function') {
+                    sendAnalyticsData(action !== 'edit-online' ? 'download' : 'edit-online', eventProps, cbWithCounter);
+                }
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'download', { 'event_category': action, 'event_callback': cbWithCounter });
+                } else {
+                    cbCounter++;
+                }
+            }
+
+            var sendAnalyticOrTimeout = decorateTimeout(sendData, 3000);
+
+            $('.mac-download').click(function (e) {
+                e.preventDefault();
+
+                eventProps.AppName = 'mac-app';
+                sendLogToAmplitude('Download', eventProps);
+
+                showModal("sec-mac-download");
+                showDownloadHint();
+
+                sendAnalyticOrTimeout('mac-app', function () {
+                    window.location = '/get/mac/';
+                });
+            });
+
+            $('.win-download').click(function (e) {
+                e.preventDefault();
+
+                eventProps.AppName = 'win-app';
+                sendLogToAmplitude('Download', eventProps);
+
+                showModal("sec-win-download");
+                showDownloadHint();
+
+                sendAnalyticOrTimeout('win-app', function () {
+                    window.location = '/get/windows/';
+                });
+            });
+
+            $('.edit-online-btn, .edit-online-link').click(function (e) {
+                e.preventDefault();
+
+                eventProps.AppName = 'online';
+                sendLogToAmplitude('Template Edit Online', eventProps);
+
+                sendAnalyticOrTimeout('edit-online', function () {
+                    window.location = '/Editor/Dashboard/EditOnline/1467028';
+                });
+            });
+        });
+    </script>
+
+    <style>
+        h1 {
+            text-transform: capitalize;
+            font-size: 32px;
+            margin: 10px 0 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+        }
+
+        .download-btn-container {
+            padding-bottom: 10px;
+        }
+
+        .preview-row .media-image {
+            border: none;
+            aspect-ratio: attr(width) / attr(height);
+        }
+
+        .preview-row {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .preview-row img,
+        .preview-row .hover-like-lightbox {
+            display: inline-block;
+        }
+
+        .preview-row .hover-like-lightbox {
+            overflow: visible;
+        }
+
+        .hover-like-lightbox:hover:after {
+            display: block;
+            content: "";
+            background: rgba(0, 0, 0, .2) 100% 100% no-repeat;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .mockup-shadow {
+            max-width: 100%;
+        }
+
+        .mockup-shadow:before {
+            bottom: 0;
+            box-shadow: 3px 3px 15px rgba(0, 0, 0, .3);
+            display: block;
+            content: '';
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: -1;
+        }
+
+        .small-icon {
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .u-icon {
+            vertical-align: middle;
+            height: 40px;
+            display: inline-block;
+        }
+
+        .icon-g {
+            fill: #999;
+            width: 48px;
+            height: 48px;
+            position: relative;
+            top: 8px;
+            margin-right: 12px;
+        }
+
+        .page-description-block {
+            margin-top: 30px;
+            font-size: 18px;
+            line-height: 1.75;
+            text-align: left;
+        }
+
+        .auth-page-description-block {
+            line-height: 1.75;
+            font-size: 14px;
+        }
+
+        .page-subtitle {
+            margin: 20px 0;
+            font-size: 18px;
+            line-height: 1.75;
+        }
+
+        .page-description-block h3 {
+            margin-bottom: 20px;
+        }
+
+        .win-download,
+        .mac-download,
+        .edit-online-btn {
+            color: #fff;
+            padding: 10px 30px;
+            margin-bottom: 10px;
+            font-size: 20px;
+            line-height: 1.4;
+            display: inline-block;
+        }
+
+        .top-btn {
+            margin: 0 0 20px 0;
+        }
+
+        @media (min-width: 991px) and (max-width: 1200px) {
+
+            .win-download,
+            .mac-download,
+            .edit-online-btn {
+                padding: 10px 26px;
+                font-size: 16px;
+            }
+        }
+
+        @media(max-width: 768px) {
+
+            .win-download,
+            .mac-download,
+            .edit-online-btn {
+                margin: 10px 0;
+                font-size: 16px;
+            }
+        }
+
+
+        .mac-download {
+            margin-left: 10px;
+            background-color: #4399fa;
+            border-color: #4399fa;
+        }
+
+        .mac-download:hover,
+        .mac-download:focus {
+            color: #fff;
+            background-color: #2e8dfa;
+            border-color: #2e8dfa;
+        }
+
+        .win-download {
+            background-color: #f15048;
+            border-color: #f15048;
+        }
+
+        .win-download:hover,
+        .win-download:focus {
+            color: #fff;
+            background-color: #ef342b;
+            border-color: #ef342b;
+        }
+
+        .edit-online-btn {
+            margin-left: 10px;
+            background-color: #5cb85c;
+            border-color: #5cb85c;
+        }
+
+        .edit-online-btn.top-btn {
+            margin: 0 0 20px 0;
+            max-width: 335px;
+            width: 100%;
+        }
+
+        .edit-online-btn:hover,
+        .edit-online-btn:focus {
+            color: #fff;
+            background-color: #4bad4b;
+            border-color: #4bad4b;
+        }
+
+        .feature-icon-label {
+            vertical-align: -0.17em;
+            margin-left: 10px;
+        }
+
+        @media (min-width: 992px) and (max-width: 1280px) {
+            #register-input {
+                width: 150px;
+                font-size: 16px;
+                padding: 6px;
+            }
+
+            #register-btn {
+                font-size: 16px;
+                border: none;
+                padding: 7px 12px;
+                font-weight: 700;
+            }
+
+            .feature-icon-label {
+                font-size: 14px;
+                margin-left: 5px;
+            }
+        }
+
+        .u-svg-link {
+            fill: #f15048;
+            height: 40px;
+            width: 40px;
+            color: #f15048;
+            position: relative;
+        }
+
+        .u-svg-content {
+            width: 0;
+            height: 0;
+        }
+
+        .right-feature-column {
+            padding: 0 10px;
+        }
+
+        @media (max-width: 992px) {
+            .right-feature-column {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .right-feature-column {
+                padding-top: 10px;
+            }
+        }
+
+        .details-keywords {
+            margin-left: -10px;
+        }
+
+        .details-keywords a {
+            display: inline-block;
+            padding: 2px 10px;
+            margin: 0 0 5px 10px;
+            font-size: 13px;
+            color: #777;
+            border: 1px solid #cecece;
+            border-radius: 20px;
+            text-transform: lowercase;
+            transition: .2s;
+        }
+
+        .details-keywords a:hover {
+            text-decoration: none;
+            color: #337ab7;
+            border-color: #337ab7;
+        }
+
+        .details-keywords i {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .customize-np-block {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .modal .container-layout {
+            padding: 20px;
+        }
+
+        .modal .u-text {
+            font-size: 28px;
+            margin: 20px auto 0;
+        }
+    </style>
+
+
+
+    <!--meta name="google-site-verification" content="91O3bL1ryXysP925e_KKodKSsrpDCHTmgGeH0IA-NbA" /-->
+    <!— Pinterest Tag —>
+        <!--
+<script>
+!function(e){if(!window.pintrk){window.pintrk = function () {
+window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
+      n=window.pintrk;n.queue=[],n.version="3.0";var
+      t=document.createElement("script");t.async=!0,t.src=e;var
+      r=document.getElementsByTagName("script")[0];
+      r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
+pintrk('load', '2619058937406', {em: '<user_email_address>'});
+pintrk('page');
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt=""
+      src="https://ct.pinterest.com/v3/?tid=2619058937406&pd[em]=<hashed_email_address>&noscript=1" />
+</noscript>
+-->
+        <!— end Pinterest Tag —>
+
+
+
+            <script type="text/javascript">
+                document.addEventListener("DOMContentLoaded", function () {
+                    if (typeof IOlazy === 'function') {
+                        var lazy = new IOlazy();
+                    }
+                });
+            </script>
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+    <div class="wrap wrap-fluid">
+        <div id="top-navbar" class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand clearfix" href="https://nicepage.com"><img class="pull-left" width="123"
+                            height="40" alt="Nicepage.com" src="//csite.nicepage.com/Images/logo-w.png" /></a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="logon-block nav navbar-nav nav-list navbar-left u-unstyled" style="font-size: 14px;">
+                        <li class="dropdown">
+                            <a href="/download">Download</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="/features">400+ Features</a>
+                        </li>
+                        <li class="dropdown">
+                            <a aria-expanded="false" role="button" data-toggle="dropdown"
+                                class="dropdown-toggle template-menu-item" href="/html-templates">10,000+ Templates
+                                <span class="caret"></span></a>
+                            <ul role="menu" class="dropdown-menu dropdown-menu-hover u-unstyled">
+                                <li><a href="/website-templates" class="templates-url"
+                                        data-urls="website-templates;templates">Website Templates</a></li>
+                                <li><a href="/website-design" class="templates-url">Website Designs</a></li>
+                                <li><a href="/wordpress-themes">WordPress Themes</a></li>
+                                <li><a href="/joomla-templates">Joomla Templates</a></li>
+                                <li><a href="/html-templates" class="templates-url"
+                                        data-urls="html-templates;html5-template;css-templates">HTML Templates</a></li>
+                            </ul>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle"
+                                href="#">
+                                Website Builders
+                                <span class="caret"></span>
+                            </a>
+                            <ul role="menu" class="dropdown-menu dropdown-menu-hover u-unstyled">
+                                <li><a class="builder-link" href="/html-website-builder">HTML Website Builder</a></li>
+                                <li><a class="builder-link" href="/wordpress-website-builder">WordPress Website
+                                        Builder</a></li>
+                                <li><a class="builder-link" href="/joomla-page-builder">Joomla Page Builder</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="/premium">Premium</a>
+                        </li>
+                        <li><a href="/forum">Forums</a></li>
+                        <li class="dropdown">
+                            <a href="/blog">Blog</a>
+                        </li>
+                        <li class="dropdown">
+                            <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle"
+                                href="#">Help<span class="caret"></span></a>
+                            <ul role="menu" class="dropdown-menu dropdown-menu-hover u-unstyled">
+                                <li><a href="/doc/1318/video-lessons">Video Tutorials</a></li>
+                                <li><a href="/doc">Documentation</a></li>
+                                <li><a href="/Forum/Topic/Create">Contact Support</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="logon-block nav navbar-nav nav-list navbar-right u-unstyled">
+
+
+
+                        <li><a href="/Editor/Account/LogOn">Sign In</a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a href="https://nicepage.com/Editor/Account/Register">Register</a></li>
+                        <li class="divider-vertical"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <section id="" class="container">
+
+
+
+
+
+
+
+
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <style>
+                                .breadcrumb {
+                                    padding: 0;
+                                    background-color: transparent;
+                                }
+
+                                .breadcrumb>.active {
+                                    color: #666;
+                                }
+                            </style>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ol class="breadcrumb">
+                                        <li>
+                                            <a href="https://nicepage.com" title="Home">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="/html-code" title="Html Code Examples">Html Code Examples</a>
+                                        </li>
+                                        <li>
+                                            <a href="/c/art-design-html-code" title="Art &amp; Design">Art &amp;
+                                                Design</a>
+                                        </li>
+                                        <li>
+                                            UI designer </li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <h1>UI designer Html Code Example</h1>
+                            <div style="margin-bottom: 20px; font-size: 14px;">
+                                Professional HTML code example. One click generating HTML codes and copy and paste into
+                                your website. Mobile-friendly. Clean HTML. Fully customizable with easy Drag-n-Drop
+                                Nicepage HTML Code editor.
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <div class="pull-left">
+                                    ID <text>: </text>1467028
+                                    &nbsp; | &nbsp;
+                                    Category :
+                                    <a href="/c/art-design-html-code">Art &amp; Design</a>, <a
+                                        href="/c/split-html-code">Split</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="/html-code/preview/ui-designer-1467028?device=desktop" target="_blank"
+                                        class="demo-link" rel="nofollow">
+                                        <div class="small-icon">
+                                            <svg id="preview" x="0px" y="0px" width="16px" height="16px"
+                                                viewBox="0 0 16 16" enable-background="new 0 0 16 16"
+                                                xml:space="preserve">
+                                                <path fill="#808080" d="M12.6,11.8c0.4-0.6,0.7-1.3,0.7-2.2c0-2-1.6-3.7-3.7-3.7S6,7.6,6,9.7s1.6,3.7,3.7,3.7c0.8,0,1.5-0.3,2.2-0.7
+                                          l3.4,3.4l0.8-0.8C16,15.2,12.6,11.8,12.6,11.8L12.6,11.8z M9.7,12.2c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5s2.5,1.1,2.5,2.5
+                                          S11.1,12.2,9.7,12.2L9.7,12.2z" />
+                                                <polygon fill="none"
+                                                    points="8,4 8,1 1,1 1,15 11,15 11,15 3.5,15 3.5,5.5 11,5.5 11,4 " />
+                                                <polygon fill="#808080"
+                                                    points="11,15 1,15 1,1 8,1 8,4 11,4 11,5.5 12,5.5 12,3.4 8.3,0 0,0 0,16 12,16 12,14 11,14 " />
+                                            </svg>
+                                        </div>
+                                        <span>Demo Preview</span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="preview-row">
+
+
+                                <a class="hover-like-lightbox mockup-shadow"
+                                    href="/html-code/preview/ui-designer-1467028?device=desktop" rel="nofollow"
+                                    target="_blank">
+                                    <picture>
+                                        <source
+                                            srcset="https://images01.nicepagecdn.com/page/14/67/html-code-preview-1467028.webp"
+                                            type="image/webp">
+                                        <source
+                                            srcset="https://images01.nicepagecdn.com/page/14/67/html-code-preview-1467028.jpg"
+                                            type="image/jpeg">
+                                        <img alt="UI designer Html Code Example"
+                                            class="media-image img-responsive noversion" height="377"
+                                            src="https://images01.nicepagecdn.com/page/14/67/html-code-preview-1467028.jpg"
+                                            style="" width="750" />
+                                    </picture>
+                                </a>
+
+                            </div>
+                            <div style="text-align: center; padding: 20px 0 10px;">
+                                <a class="btn btn-lg win-download" href="#" type="button">Download for Windows</a>
+                                <a class="btn btn-lg mac-download" href="#" type="button">Download for Mac</a>
+                            </div>
+                            <div class="customize-np-block">
+                                <h2>Customize with Nicepage</h2>
+                                <p>When using <a href="/html-website-builder">HTML Code Generator</a> you will be able
+                                    to adjust colors, fonts, header and fooer, layout, columns and other design
+                                    elements, as well as content and images.</p>
+                                <style>
+                                    .small-video {
+                                        display: none;
+                                    }
+
+                                    @media (max-width: 450px) {
+                                        .small-video {
+                                            display: inline-block;
+                                        }
+
+                                        .big-video {
+                                            display: none;
+                                        }
+                                    }
+                                </style>
+                                <br />
+                                <div>
+                                    <video class="big-video embed-responsive-item lazyload lazyloading" loop="" muted=""
+                                        autoplay="autoplay" playsinline=""
+                                        data-src="//csite.nicepage.com/Images/Site/editor.mp4?v2"
+                                        style="/* border: 1px solid #ccc; */width: 100%;">
+                                        <source type="video/mp4">
+                                        <p>Your browser does not support HTML5 video.</p>
+                                    </video>
+                                    <video class="small-video embed-responsive-item lazyload lazyloading" loop=""
+                                        muted="" autoplay="autoplay" playsinline=""
+                                        data-src="//csite.nicepage.com/Images/Site/editor-420.mp4?v2"
+                                        style="/* border: 1px solid #ccc; */width: 100%;">
+                                        <source type="video/mp4">
+                                        <p>Your browser does not support HTML5 video.</p>
+                                    </video>
+                                    <!--img data-src="//images02.nicepage.io/a122014e1e8cdf24af08f98c/4a7b6b7da99054fbb764a6d0/editor.gif?version=" class="lazyload" style="max-width: 100%;"/-->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="margin-left: 10px;" class="hidden-sm hidden-xs">
+                                <a class="btn btn-lg win-download top-btn" href="#" type="button">Download<br />for
+                                    Windows</a>
+                                <a class="btn btn-lg mac-download top-btn" href="#" type="button">Download<br />for
+                                    Mac</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="margin-left: 10px;">
+                                <h3>Edit Template Offline</h3>
+                                <div class="auth-page-description-block">
+                                    1. Download and Install the Nicepage version for Windows, Mac, WordPress and Joomla
+                                    from the <a href="/download">download page</a>
+                                    <br />
+                                    2. Create a new page or select existing <br />
+                                    3. Click Add new block, search for id <strong>1467028</strong> and click enter
+                                </div>
+                                <h3>Edit Template Online</h3>
+                                <div class="auth-page-description-block">
+                                    Start <a class="edit-online-link" href="#">edit online</a> this template on our
+                                    hosting
+                                </div>
+
+                                <div class="page-description-block">
+                                    <h3>Create Awesome Websites</h3>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <img alt="WordPress Plugin" width="32" height="32"
+                                                src="//csite.nicepage.com/Images/Site/icon-wp-32.png" />
+                                            <span class="feature-icon-label">WordPress</span>
+                                        </div>
+                                        <div class="col-sm-6 right-feature-column">
+                                            <img alt="Windows Application" width="32" height="32"
+                                                src="//csite.nicepage.com/Images/Site/icon-windows-32.png" />
+                                            <span class="feature-icon-label">Windows App</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-sm-6">
+                                            <img alt="Joomla Plugin" width="32" height="32"
+                                                src="//csite.nicepage.com/Images/Site/icon-joomla-32.png" />
+                                            <span class="feature-icon-label">Joomla</span>
+                                        </div>
+                                        <div class="col-sm-6 right-feature-column">
+                                            <img alt="Mac OS Application" width="32" height="32"
+                                                src="//csite.nicepage.com/Images/Site/icon-mac-32.png" />
+                                            <span class="feature-icon-label">Mac OS App</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-sm-6">
+                                            <img alt="HTML5" width="32" height="32"
+                                                src="//csite.nicepage.com/Images/Site/icon-html-32.png" />
+                                            <span class="feature-icon-label">HTML5</span>
+                                        </div>
+                                        <div class="col-sm-6 right-feature-column">
+                                            <img alt="Online Builder" width="32" height="32"
+                                                src="//csite.nicepage.com/Images/Site/icon-online-32.png" />
+                                            <span class="feature-icon-label">Online</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="page-description-block">
+                                    <h3>Free Nicepage Builder</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="u-icon">
+                                                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice"
+                                                    viewBox="0 0 511.999 511.999">
+                                                    <use xlink:href="#svg-d890"></use>
+                                                </svg><svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                                    id="svg-d890" x="0px" y="0px" viewBox="0 0 511.999 511.999"
+                                                    style="enable-background: new 0 0 511.999 511.999;"
+                                                    xml:space="preserve" class="u-svg-content">
+                                                    <g>
+                                                        <g>
+                                                            <path
+                                                                d="M453.034,361.322c-2.808-1.164-6.04-0.521-8.19,1.628l-82.126,82.126c-2.149,2.15-2.792,5.382-1.628,8.19    c1.162,2.809,3.904,4.639,6.943,4.639h82.126c4.151,0,7.515-3.364,7.515-7.515v-82.126    C457.673,365.225,455.842,362.485,453.034,361.322z M386.173,442.876l56.469-56.469v56.469H386.173z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <path
+                                                                d="M507.361,240.867c-2.808-1.164-6.04-0.521-8.19,1.628l-22.507,22.507V111.971c0-4.151-3.365-7.515-7.515-7.515h-57.741    l20.96-20.96c0.003-0.003,0.006-0.007,0.009-0.01l20.196-20.196c4.327-4.327,6.71-10.083,6.71-16.203s-2.383-11.874-6.71-16.203    L429.219,7.53c-4.327-4.327-10.083-6.71-16.203-6.71s-11.875,2.383-16.203,6.71l-20.206,20.206l-24.416,24.416l-52.303,52.303    H66.62V30.11c0-4.151-3.365-7.515-7.515-7.515C26.515,22.597,0,49.11,0,81.702v319.186c0,0.555,0.064,1.095,0.178,1.615    c1.038,13.829,7.021,26.678,17.02,36.432C27.886,449.359,41.995,455.1,56.927,455.1h229.638l-43.249,43.249    c-2.149,2.15-2.792,5.381-1.629,8.19c1.163,2.808,3.904,4.639,6.943,4.639h255.855c4.15,0,7.515-3.364,7.515-7.515V247.81    C512,244.771,510.168,242.03,507.361,240.867z M407.443,18.159c3.072-3.074,8.077-3.074,11.149,0l23.355,23.355    c3.074,3.073,3.074,8.076,0,11.15l-14.891,14.892L392.55,33.051L407.443,18.159z M381.922,43.679l34.505,34.504l-13.789,13.789    l-34.503-34.504L381.922,43.679z M496.972,332.252h-13.865c-4.151,0-7.515,3.364-7.515,7.515c0,4.151,3.364,7.515,7.515,7.515    h13.865v22.646h-13.865c-4.151,0-7.515,3.364-7.515,7.515s3.364,7.515,7.515,7.515h13.865v22.645h-13.865    c-4.151,0-7.515,3.364-7.515,7.515c0,4.151,3.364,7.515,7.515,7.515h13.865v22.646h-13.865c-4.151,0-7.515,3.365-7.515,7.515    c0,4.151,3.364,7.515,7.515,7.515h13.865v35.842h-230.2l75.908-75.907c2.935-2.936,2.935-7.693,0-10.628    c-0.337-0.337-0.699-0.629-1.078-0.889c-2.926-2.004-6.952-1.709-9.551,0.889l-30.456,30.456H56.928    c-22.792,0-41.14-17.794-41.862-40.545c0.043-1.428,0.154-2.844,0.332-4.244c0.001-0.008,0.002-0.016,0.003-0.024    c0.084-0.665,0.185-1.327,0.3-1.985c0.013-0.075,0.027-0.15,0.04-0.225c0.105-0.587,0.223-1.171,0.352-1.753    c0.036-0.162,0.074-0.324,0.112-0.485c0.114-0.492,0.237-0.981,0.369-1.468c0.072-0.264,0.147-0.525,0.224-0.788    c0.11-0.382,0.224-0.763,0.345-1.14c0.121-0.377,0.25-0.75,0.381-1.123c0.091-0.261,0.181-0.522,0.279-0.781    c0.183-0.492,0.377-0.979,0.577-1.462c0.057-0.139,0.113-0.28,0.172-0.419c0.257-0.6,0.524-1.193,0.806-1.779    c0.012-0.025,0.023-0.05,0.035-0.075c5.878-12.164,17.183-21.233,30.75-24.047c0.038-0.008,0.076-0.017,0.114-0.025    c0.622-0.127,1.25-0.236,1.882-0.337c0.105-0.017,0.21-0.038,0.317-0.054c0.571-0.087,1.148-0.155,1.725-0.22    c0.162-0.018,0.323-0.043,0.486-0.059c0.557-0.056,1.119-0.093,1.681-0.128c0.178-0.011,0.356-0.03,0.534-0.039    c0.736-0.037,1.478-0.056,2.223-0.056c4.15,0,7.515-3.364,7.515-7.515v-54.489c0-4.151-3.365-7.515-7.515-7.515    c-4.15,0-7.515,3.364-7.515,7.515v47.447c-12.69,1.605-24.469,7.265-33.757,16.335c-0.977,0.954-1.903,1.946-2.805,2.954V81.702    c0-21.741,15.826-39.858,36.561-43.436v73.705v152.777v0.001c0,4.15,3.365,7.515,7.515,7.515c4.15,0,7.515-3.365,7.515-7.515    v-0.001V119.486h218.24l-41.544,41.544c-2.935,2.936-2.935,7.693,0,10.628c2.935,2.934,7.693,2.934,10.627,0l54.373-54.373    c0.002-0.002,0.003-0.004,0.005-0.005l49.185-49.185l34.503,34.505l-4.048,4.048c-0.003,0.003-0.007,0.006-0.01,0.009    l-151.528,151.53l-34.504-34.504l29.868-29.868c2.935-2.936,2.935-7.693,0-10.628c-2.935-2.934-7.693-2.934-10.627,0    l-35.183,35.182c-0.188,0.188-0.364,0.387-0.529,0.591c-0.055,0.068-0.104,0.141-0.156,0.212c-0.106,0.141-0.21,0.283-0.307,0.431    c-0.055,0.086-0.105,0.174-0.157,0.263c-0.083,0.14-0.163,0.282-0.236,0.427c-0.048,0.094-0.091,0.189-0.135,0.287    c-0.067,0.147-0.129,0.297-0.186,0.447c-0.02,0.053-0.046,0.103-0.065,0.156l-14.641,41.475l-9.982,28.279    c-0.132,0.376-0.227,0.758-0.298,1.143h-24.992c-4.15,0-7.515,3.364-7.515,7.515c0,4.151,3.365,7.515,7.515,7.515h208.114    c4.151,0,7.515-3.364,7.515-7.515c0-4.151-3.364-7.515-7.515-7.515H193.093l45.83-16.178c0.038-0.014,0.074-0.033,0.112-0.047    c0.178-0.066,0.353-0.14,0.526-0.219c0.069-0.032,0.138-0.062,0.205-0.095c0.18-0.09,0.357-0.189,0.531-0.295    c0.056-0.034,0.114-0.065,0.169-0.1c0.181-0.116,0.357-0.243,0.53-0.377c0.043-0.033,0.088-0.062,0.13-0.096    c0.209-0.168,0.414-0.349,0.608-0.543l154.644-154.643h65.255v160.546L354.137,387.53c-2.935,2.936-2.935,7.693,0,10.628    c0.183,0.183,0.374,0.355,0.571,0.516c1.378,1.123,3.061,1.685,4.743,1.685s3.366-0.562,4.743-1.685    c0.197-0.16,0.388-0.333,0.571-0.516c0.003-0.003,0,0,0.003-0.003L496.972,265.95V332.252z M222.677,265.696l-21.526,7.599    l-14.342-14.342l7.599-21.526L222.677,265.696z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <span class="feature-icon-label">10,000+ Web Templates</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-sm-12">
+                                            <div class="u-icon">
+                                                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice"
+                                                    viewBox="0 0 512 512">
+                                                    <use xlink:href="#svg-b020"></use>
+                                                </svg><svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                                    id="svg-b020" x="0px" y="0px" viewBox="0 0 512 512"
+                                                    style="enable-background: new 0 0 512 512;" xml:space="preserve"
+                                                    class="u-svg-content">
+                                                    <g>
+                                                        <g>
+                                                            <path
+                                                                d="M458.667,192H352c-5.888,0-10.667,4.779-10.667,10.667s4.779,10.667,10.667,10.667h106.667c17.643,0,32,14.357,32,32    v213.333c0,17.643-14.357,32-32,32H245.333c-17.643,0-32-14.357-32-32v-85.333c0-5.888-4.779-10.667-10.667-10.667    S192,367.445,192,373.333v85.333C192,488.064,215.936,512,245.333,512h213.333C488.064,512,512,488.064,512,458.667V245.333    C512,215.936,488.064,192,458.667,192z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <path
+                                                                d="M160,298.667h-10.667c-5.888,0-10.667,4.779-10.667,10.667S143.445,320,149.333,320H160    c5.888,0,10.667-4.779,10.667-10.667S165.888,298.667,160,298.667z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M62.741,0h-9.408C48.235,0,43.2,0.725,38.357,2.133c-5.653,1.664-8.896,7.595-7.253,13.248     c1.365,4.651,5.632,7.659,10.24,7.659c1.003,0,2.005-0.128,3.008-0.427c2.901-0.853,5.909-1.28,8.981-1.28h9.408     c5.909,0,10.667-4.779,10.667-10.667S68.629,0,62.741,0z">
+                                                                </path>
+                                                                <path
+                                                                    d="M21.333,257.216v-21.568c0-5.888-4.779-10.667-10.667-10.667S0,229.76,0,235.648v21.568     c0,5.888,4.779,10.667,10.667,10.667S21.333,263.104,21.333,257.216z">
+                                                                </path>
+                                                                <path
+                                                                    d="M10.667,203.179c5.888,0,10.667-4.779,10.667-10.667v-21.568c0-5.888-4.779-10.667-10.667-10.667S0,165.056,0,170.944     v21.568C0,198.4,4.779,203.179,10.667,203.179z">
+                                                                </path>
+                                                                <path
+                                                                    d="M10.667,73.792c5.888,0,10.667-4.779,10.667-10.667v-9.792c0-2.965,0.405-5.888,1.195-8.704     c1.6-5.675-1.685-11.563-7.36-13.163c-5.632-1.685-11.563,1.664-13.163,7.36C0.683,43.541,0,48.427,0,53.333v9.792     C0,69.013,4.779,73.792,10.667,73.792z">
+                                                                </path>
+                                                                <path
+                                                                    d="M10.667,138.496c5.888,0,10.667-4.779,10.667-10.667v-21.568c0-5.888-4.779-10.667-10.667-10.667S0,100.373,0,106.261     v21.568C0,133.717,4.779,138.496,10.667,138.496z">
+                                                                </path>
+                                                                <path
+                                                                    d="M44.587,297.451c-5.163-1.472-9.941-4.267-13.781-8.085c-4.16-4.16-10.923-4.117-15.083,0.043     c-4.16,4.181-4.139,10.944,0.043,15.083c6.4,6.379,14.357,11.029,22.997,13.483c0.981,0.277,1.963,0.405,2.923,0.405     c4.629,0,8.917-3.051,10.24-7.744C53.547,304.96,50.261,299.051,44.587,297.451z">
+                                                                </path>
+                                                                <path
+                                                                    d="M307.605,51.968c0.981,0,1.984-0.128,2.987-0.448c5.653-1.664,8.917-7.573,7.253-13.227     c-2.517-8.619-7.253-16.533-13.675-22.891c-4.181-4.139-10.944-4.117-15.083,0.085c-4.139,4.181-4.096,10.944,0.085,15.083     c3.84,3.84,6.699,8.576,8.192,13.717C298.731,48.939,302.976,51.968,307.605,51.968z">
+                                                                </path>
+                                                                <path
+                                                                    d="M256.832,0h-21.568c-5.888,0-10.667,4.779-10.667,10.667s4.779,10.667,10.667,10.667h21.568     c5.888,0,10.667-4.779,10.667-10.667S262.72,0,256.832,0z">
+                                                                </path>
+                                                                <path
+                                                                    d="M106.219,298.667H84.651c-5.888,0-10.667,4.779-10.667,10.667S78.763,320,84.651,320h21.568     c5.888,0,10.667-4.779,10.667-10.667S112.107,298.667,106.219,298.667z">
+                                                                </path>
+                                                                <path
+                                                                    d="M309.333,73.6c-5.888,0-10.667,4.779-10.667,10.667v21.568c0,5.888,4.779,10.667,10.667,10.667S320,111.723,320,105.835     V84.267C320,78.357,315.221,73.6,309.333,73.6z">
+                                                                </path>
+                                                                <path
+                                                                    d="M192.149,0h-21.568c-5.909,0-10.667,4.779-10.667,10.667s4.779,10.667,10.667,10.667h21.547     c5.909,0,10.688-4.779,10.688-10.667S198.037,0,192.149,0z">
+                                                                </path>
+                                                                <path
+                                                                    d="M127.445,0h-21.568c-5.888,0-10.667,4.779-10.667,10.667s4.779,10.667,10.667,10.667h21.568     c5.888,0,10.667-4.779,10.667-10.667S133.333,0,127.445,0z">
+                                                                </path>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <path
+                                                                d="M309.333,138.667c-5.888,0-10.667,4.779-10.667,10.667V160c0,5.888,4.779,10.667,10.667,10.667S320,165.888,320,160    v-10.667C320,143.445,315.221,138.667,309.333,138.667z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <path
+                                                                d="M349.952,185.515l-33.067-33.067c-12.971-12.971-34.112-12.971-47.083,0c-3.883,3.883-6.613,8.512-8.171,13.419    c-11.627-4.053-25.536-1.045-34.496,7.915c-4.885,4.885-7.915,10.923-9.131,17.237c-10.176-1.429-20.8,2.027-28.203,9.429    c-7.083,7.083-10.304,16.576-9.664,25.856c-7.189,0.981-13.824,4.245-19.029,9.451c-6.293,6.293-9.749,14.656-9.749,23.552    s3.456,17.28,9.749,23.552l9.557,9.557v38.251C170.667,360.064,194.603,384,224,384h43.733C331.84,384,384,331.84,384,267.733    C384,236.693,371.904,207.488,349.952,185.515z M267.733,362.667H224c-17.643,0-32-14.357-32-32v-16.917l24.469,24.469    c4.16,4.16,10.923,4.16,15.083,0c2.069-2.091,3.115-4.821,3.115-7.552c0-2.731-1.045-5.461-3.115-7.552l-55.36-55.36    c-2.261-2.24-3.499-5.269-3.499-8.448c0-3.179,1.237-6.187,3.499-8.448c4.523-4.523,12.395-4.523,16.917,0l23.36,23.36    c4.16,4.16,10.923,4.16,15.083,0c2.069-2.091,3.115-4.821,3.115-7.552c0-2.731-1.045-5.461-3.115-7.531l-26.667-26.667    c-4.672-4.672-4.672-12.245,0-16.917c4.523-4.523,12.395-4.523,16.917,0l16,16c4.16,4.16,10.923,4.16,15.083,0    c2.069-2.091,3.115-4.821,3.115-7.552s-1.045-5.461-3.115-7.531l-10.667-10.667c-4.672-4.672-4.672-12.245,0-16.917    c4.523-4.523,12.395-4.523,16.917,0l10.667,10.667c4.16,4.16,10.923,4.16,15.083,0c2.069-2.091,3.115-4.821,3.115-7.552    s-1.045-5.461-3.136-7.552c-2.261-2.24-3.499-5.248-3.499-8.448s1.259-6.208,3.52-8.448c4.672-4.672,12.245-4.672,16.917,0    l33.067,33.067c17.92,17.92,27.797,41.771,27.797,67.115C362.667,320.085,320.085,362.667,267.733,362.667z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <span class="feature-icon-label">Easy Drag-n-Drop</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-sm-12">
+                                            <div class="u-icon">
+                                                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice"
+                                                    viewBox="0 0 512 512">
+                                                    <use xlink:href="#svg-b97a"></use>
+                                                </svg><svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                                    id="svg-b97a" x="0px" y="0px" viewBox="0 0 512 512"
+                                                    style="enable-background: new 0 0 512 512;" xml:space="preserve"
+                                                    class="u-svg-content">
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M106,121.083c-2.135-2.135-5.01-3.24-8.104-3.115c-3.021,0.167-5.823,1.594-7.729,3.948     c-30.635,37.844-47.5,85.458-47.5,134.083c0,117.635,95.698,213.333,213.333,213.333c48.625,0,96.24-16.865,134.083-47.5     c2.354-1.906,3.781-4.708,3.948-7.729c0.156-3.021-0.979-5.969-3.115-8.104L106,121.083z M256,448c-105.865,0-192-86.135-192-192     c0-40.406,12.25-78.604,35.542-111.198l267.656,267.656C334.604,435.75,296.406,448,256,448z">
+                                                                </path>
+                                                                <path
+                                                                    d="M256,0C114.844,0,0,114.844,0,256s114.844,256,256,256s256-114.844,256-256S397.156,0,256,0z M256,490.667     C126.604,490.667,21.333,385.396,21.333,256S126.604,21.333,256,21.333S490.667,126.604,490.667,256S385.396,490.667,256,490.667     z">
+                                                                </path>
+                                                                <path
+                                                                    d="M256,42.667c-48.625,0-96.24,16.865-134.083,47.5c-2.354,1.906-3.781,4.708-3.948,7.729     c-0.156,3.021,0.979,5.969,3.115,8.104L406,390.917c2,2.01,4.719,3.125,7.542,3.125c0.188,0,0.375,0,0.563-0.01     c3.021-0.167,5.823-1.594,7.729-3.948c30.635-37.844,47.5-85.458,47.5-134.083C469.333,138.365,373.635,42.667,256,42.667z      M412.458,367.198L144.802,99.542C177.396,76.25,215.594,64,256,64c105.865,0,192,86.135,192,192     C448,296.406,435.75,334.604,412.458,367.198z">
+                                                                </path>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <span class="feature-icon-label">No Coding</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-sm-12">
+                                            <div class="u-icon">
+                                                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice"
+                                                    viewBox="0 0 512 512">
+                                                    <use xlink:href="#svg-1e24"></use>
+                                                </svg><svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                                    id="svg-1e24" x="0px" y="0px" viewBox="0 0 512 512"
+                                                    style="enable-background: new 0 0 512 512;" xml:space="preserve"
+                                                    class="u-svg-content">
+                                                    <g>
+                                                        <g>
+                                                            <path
+                                                                d="M485.547,251.733h-58.88v-153.6C426.638,74.581,407.552,55.495,384,55.467H128c-23.552,0.028-42.638,19.114-42.667,42.667    v51.2H38.519C17.255,149.357,0.023,166.589,0,187.853v230.161c0.023,21.264,17.255,38.496,38.519,38.519h136.294    c16.24-0.049,30.7-10.294,36.13-25.6H358.4c4.713,0,8.533-3.82,8.533-8.533v-17.067c0-14.138-11.462-25.6-25.6-25.6h-25.6V345.6    H384v84.48c0,14.61,11.844,26.453,26.453,26.453h75.093c14.61,0,26.453-11.844,26.453-26.453V278.187    C512,263.577,500.156,251.733,485.547,251.733z M196.267,418.014c-0.009,11.844-9.609,21.443-21.453,21.453H38.519    c-11.844-0.009-21.443-9.609-21.453-21.453v-4.147h179.2V418.014z M196.267,396.8h-179.2V209.067h179.2V396.8z M196.267,192    h-179.2v-4.147c0.009-11.844,9.609-21.443,21.453-21.453h136.294c11.844,0.009,21.443,9.609,21.453,21.453V192z M341.333,396.8    c4.713,0,8.533,3.821,8.533,8.533v8.533H213.333V396.8H341.333z M213.333,379.733V345.6h85.333v34.133H213.333z M384,328.533    h-76.8h-93.867v-25.6H384V328.533z M384,278.187v7.68H213.333v-98.014c-0.024-21.264-17.256-38.496-38.519-38.519H102.4v-51.2    c0-14.138,11.461-25.6,25.6-25.6h256c14.138,0,25.6,11.461,25.6,25.6v153.685C395.358,252.278,384.039,263.937,384,278.187z     M494.933,430.08c0,5.184-4.203,9.387-9.387,9.387h-75.093c-5.184,0-9.387-4.203-9.387-9.387v-7.68h93.867V430.08z     M494.933,405.333h-93.867v-102.4h93.867V405.333z M494.933,285.867h-93.867v-7.68c0-5.184,4.203-9.387,9.387-9.387h75.093    c5.184,0,9.387,4.203,9.387,9.387V285.867z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <span class="feature-icon-label">Mobile-Friendly</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="page-description-block">
+                                    <h3>Keywords</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <script>
+                                                document.addEventListener("DOMContentLoaded", function () {
+                                                    ProcessKeywords('#Keywords',
+                                                        '#details-keywords',
+                                                        '#add-keywords',
+                                                        true,
+                                                        false,
+                                                        false,
+                                                        {
+                                                            'url': '/k/%7B0%7D-html-code',
+                                                            'noFollow': true
+                                                        });
+                                                });
+                                            </script>
+                                            <input id="Keywords" name="Keywords" type="hidden"
+                                                value="crafting;effective;men;isolated;adult;one person;portrait;abstract;art;decorative;texture;color;draw;design;split;splits" />
+                                            <p class="details-keywords" id="details-keywords"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>More from Art &amp; Design Html Code Examples</h3>
+
+                    <script type="text/javascript">
+                        var submitSearchTimer = false;
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var thumbSlider = $('.thumbnail-slider');
+                            thumbSlider.thumbnailSlider();
+                        });
+                    </script>
+                    <div class="thumbnail-slider">
+                        <div class="thumbnail-slider-viewport-wrapper">
+                            <div class="thumbnail-slider-viewport">
+                                <div class="thumbnail-slider-list">
+                                    <a href="/hc/1231528/11-years-branding-experience-html-code"
+                                        data-title="11+ Years branding experience">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="11+ Years branding experience Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/12/31/html-code-1231528.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/4783640/building-great-websites-for-industry-leading-brands-html-code"
+                                        data-title="Building great websites for industry-leading brands">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="Building great websites for industry-leading brands Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/47/83/html-code-4783640.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/5587790/fully-integrated-design-strategy-analytics-technology-html-code"
+                                        data-title="Fully integrated design, strategy, analytics, technology">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="Fully integrated design, strategy, analytics, technology Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/55/87/html-code-5587790.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/6006671/i-am-a-website-designer-and-developer-html-code"
+                                        data-title="I am a website designer and developer">
+                                        <span style="width: 200px; height: 232px;">
+                                            <img alt="I am a website designer and developer Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/60/06/html-code-6006671.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/494050/conceptual-design-html-code" data-title="Conceptual design">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="Conceptual design Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/49/40/html-code-494050.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/6012845/design-agency-portfolio-html-code"
+                                        data-title="Design agency portfolio">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="Design agency portfolio Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/60/12/html-code-6012845.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/3562298/pro-design-studio-html-code" data-title="Pro design studio">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="Pro design studio Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/35/62/html-code-3562298.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/350887/fashion-designer-portfolio-html-code"
+                                        data-title="Fashion Designer Portfolio">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="Fashion Designer Portfolio Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/35/08/html-code-350887.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/3847937/a-bit-about-me-html-code" data-title="A bit about me">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="A bit about me Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/38/47/html-code-3847937.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/2847475/happiness-consulting-html-code"
+                                        data-title="Happiness consulting">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="Happiness consulting Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/28/47/html-code-2847475.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/6021882/about-the-logistics-company-html-code"
+                                        data-title="About the logistics company">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="About the logistics company Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/60/21/html-code-6021882.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/6000785/we-create-meaningful-brands-html-code"
+                                        data-title="We create meaningful brands">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="We create meaningful brands Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/60/00/html-code-6000785.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/697431/modern-progressive-design-html-code"
+                                        data-title="Modern progressive design">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="Modern progressive design Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/69/74/html-code-697431.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/5562133/professional-app-developer-html-code"
+                                        data-title="Professional app developer">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="Professional app developer Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/55/62/html-code-5562133.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/5204099/we-create-experiences-that-brands-live-by-html-code"
+                                        data-title="We create experiences that brands live by">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="We create experiences that brands live by Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/52/04/html-code-5204099.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/3817113/seo-agency-html-code" data-title="SEO agency">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="SEO agency Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/38/17/html-code-3817113.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/82540/doing-branding-for-business-html-code"
+                                        data-title="Doing branding for business">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="Doing branding for business Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/82/54/html-code-82540.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/1158250/we-design-modern-websites-html-code"
+                                        data-title="We design modern websites">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="We design modern websites Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/11/58/html-code-1158250.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/3846478/i-am-a-digital-designer-html-code"
+                                        data-title="I am a digital designer">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="I am a digital designer Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/38/46/html-code-3846478.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                    <a href="/hc/4753423/the-creative-agency-for-your-next-big-thing-html-code"
+                                        data-title="The creative agency for your next big thing">
+                                        <span style="width: 200px; height: 275px;">
+                                            <img alt="The creative agency for your next big thing Html Code Examples"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                                data-src="https://images01.nicepagecdn.com/page/47/53/html-code-4753423.jpg"
+                                                class="lazyload" />
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="thumbnail-slider-control left off" href="#" rel="noopener"
+                            aria-label="thumbnail slider show more">
+                            <span class="thumbnail-slider-control-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                    <path fill="currentColor"
+                                        d="M9.53 11.71L5.99 8.18a.25.25 0 0 1 0-.36L9.53 4.3a.75.75 0 1 0-1.06-1.06L4.93 6.76c-.68.69-.68 1.8 0 2.48l3.54 3.53a.75.75 0 0 0 1.06-1.06z">
+                                    </path>
+                                </svg>
+                            </span>
+                        </a>
+                        <a class="thumbnail-slider-control right" href="#" rel="noopener"
+                            aria-label="thumbnail slider show more">
+                            <span class="thumbnail-slider-control-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                    <path fill="currentColor"
+                                        d="M6.47 4.29l3.54 3.53c.1.1.1.26 0 .36L6.47 11.7a.75.75 0 1 0 1.06 1.06l3.54-3.53c.68-.69.68-1.8 0-2.48L7.53 3.23a.75.75 0 0 0-1.06 1.06z">
+                                    </path>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>More from Art &amp; Design Blocks</h3>
+
+
+
+                    <ul class="thumbnails thumbnails-loading list-unstyled">
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 203px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/459198/graphic-designeer-profile-html-code"
+                                    style="width:260px; height: 153px;" title="Graphic Designeer Profile"><img
+                                        alt="Graphic Designeer Profile" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/45/91/html-code-459198.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/459198/graphic-designeer-profile-html-code"
+                                    title="Graphic Designeer Profile">Graphic Designeer Profile</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 286px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/2976445/creating-an-iconic-brand-identity-html-code"
+                                    style="width:260px; height: 236px;" title="Creating An Iconic Brand Identity"><img
+                                        alt="Creating An Iconic Brand Identity" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/29/76/html-code-2976445.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/2976445/creating-an-iconic-brand-identity-html-code"
+                                    title="Creating An Iconic Brand Identity">Creating An Iconic Brand Identity</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 317px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/456916/our-creative-works-html-code"
+                                    style="width:260px; height: 267px;" title="Our Creative Works"><img
+                                        alt="Our Creative Works" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/45/69/html-code-456916.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/456916/our-creative-works-html-code" title="Our Creative Works">Our
+                                    Creative Works</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 219px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/4237625/advertising-design-and-brand-identity-html-code"
+                                    style="width:260px; height: 169px;"
+                                    title="Advertising, Design And Brand Identity"><img
+                                        alt="Advertising, Design And Brand Identity"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/42/37/html-code-4237625.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/4237625/advertising-design-and-brand-identity-html-code"
+                                    title="Advertising, Design And Brand Identity">Advertising, Design And Brand
+                                    Identity</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 220px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/611789/directions-of-the-digital-agency-html-code"
+                                    style="width:260px; height: 170px;" title="Directions Of The Digital Agency"><img
+                                        alt="Directions Of The Digital Agency" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/61/17/html-code-611789.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/611789/directions-of-the-digital-agency-html-code"
+                                    title="Directions Of The Digital Agency">Directions Of The Digital Agency</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 190px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/2702838/block-with-slider-html-code"
+                                    style="width:260px; height: 140px;" title="Block With Slider"><img
+                                        alt="Block With Slider" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/27/02/html-code-2702838.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/2702838/block-with-slider-html-code" title="Block With Slider">Block With
+                                    Slider</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 241px;">
+                            <div class="page-image">
+                                <a class="thumbnail"
+                                    href="/hc/4747259/we-know-how-to-create-revolutionary-experiences-html-code"
+                                    style="width:260px; height: 191px;"
+                                    title="We Know How To Create Revolutionary Experiences"><img
+                                        alt="We Know How To Create Revolutionary Experiences"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/47/47/html-code-4747259.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/4747259/we-know-how-to-create-revolutionary-experiences-html-code"
+                                    title="We Know How To Create Revolutionary Experiences">We Know How To Create
+                                    Revolutionary Experiences</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 300px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3109323/visual-and-product-design-html-code"
+                                    style="width:260px; height: 250px;" title="Visual And Product Design"><img
+                                        alt="Visual And Product Design" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/31/09/html-code-3109323.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3109323/visual-and-product-design-html-code"
+                                    title="Visual And Product Design">Visual And Product Design</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 337px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/500665/multitalented-designer-html-code"
+                                    style="width:260px; height: 287px;" title="Multitalented Designer"><img
+                                        alt="Multitalented Designer" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/50/06/html-code-500665.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/500665/multitalented-designer-html-code"
+                                    title="Multitalented Designer">Multitalented Designer</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 298px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3628888/digital-studio-works-html-code"
+                                    style="width:260px; height: 248px;"
+                                    title="Digital Studio Works Html Code Example"><img
+                                        alt="Digital Studio Works Html Code Example"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/36/28/html-code-3628888.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3628888/digital-studio-works-html-code"
+                                    title="Digital Studio Works Html Code Example">Digital Studio Works Html Code
+                                    Example</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item" style="width: 260px; height: 280px;">
+                            <div class="download-block " style="background-color: #363636; ">
+                                <div style="color: #ffffff;" class="download-title">Build Website with no Coding</div>
+                                <a class="btn btn-lg download-btn" href="/download" type="button" rel="nofollow"
+                                    style="background-color: #cd30c0;">Download</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 200px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6000802/event-marketing-agency-html-code"
+                                    style="width:260px; height: 150px;" title="Event Marketing Agency"><img
+                                        alt="Event Marketing Agency" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/00/html-code-6000802.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6000802/event-marketing-agency-html-code"
+                                    title="Event Marketing Agency">Event Marketing Agency</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 187px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/728677/brand-asset-creation-html-code"
+                                    style="width:260px; height: 137px;" title="Brand Asset Creation"><img
+                                        alt="Brand Asset Creation" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/72/86/html-code-728677.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/728677/brand-asset-creation-html-code" title="Brand Asset Creation">Brand
+                                    Asset Creation</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 301px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/5488400/we-are-researchers-and-innovators-html-code"
+                                    style="width:260px; height: 251px;" title="We Are Researchers And Innovators"><img
+                                        alt="We Are Researchers And Innovators" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/54/88/html-code-5488400.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/5488400/we-are-researchers-and-innovators-html-code"
+                                    title="We Are Researchers And Innovators">We Are Researchers And Innovators</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 165px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/96142/what-our-guests-have-to-say-html-code"
+                                    style="width:260px; height: 115px;" title="What Our Guests Have To Say"><img
+                                        alt="What Our Guests Have To Say" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/96/14/html-code-96142.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/96142/what-our-guests-have-to-say-html-code"
+                                    title="What Our Guests Have To Say">What Our Guests Have To Say</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 211px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/1158257/we-specialise-in-web-design-html-code"
+                                    style="width:260px; height: 161px;" title="We Specialise In Web Design"><img
+                                        alt="We Specialise In Web Design" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/11/58/html-code-1158257.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/1158257/we-specialise-in-web-design-html-code"
+                                    title="We Specialise In Web Design">We Specialise In Web Design</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 275px;">
+                            <div class="page-image">
+                                <a class="thumbnail"
+                                    href="/hc/2999491/my-passion-and-focus-is-web-development-html-code"
+                                    style="width:260px; height: 225px;"
+                                    title="My Passion And Focus Is Web Development"><img
+                                        alt="My Passion And Focus Is Web Development"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/29/99/html-code-2999491.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/2999491/my-passion-and-focus-is-web-development-html-code"
+                                    title="My Passion And Focus Is Web Development">My Passion And Focus Is Web
+                                    Development</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 326px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/740062/six-areas-of-work-html-code"
+                                    style="width:260px; height: 276px;" title="Six Areas Of Work"><img
+                                        alt="Six Areas Of Work" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/74/00/html-code-740062.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/740062/six-areas-of-work-html-code" title="Six Areas Of Work">Six Areas Of
+                                    Work</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 252px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6012246/digital-design-studio-services-html-code"
+                                    style="width:260px; height: 202px;" title="Digital Design Studio Services"><img
+                                        alt="Digital Design Studio Services" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/12/html-code-6012246.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6012246/digital-design-studio-services-html-code"
+                                    title="Digital Design Studio Services">Digital Design Studio Services</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 211px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/2432144/in-the-city-html-code"
+                                    style="width:260px; height: 161px;" title="In The City"><img alt="In The City"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/24/32/html-code-2432144.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/2432144/in-the-city-html-code" title="In The City">In The City</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 184px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/5502094/designers-engineers-innovators-html-code"
+                                    style="width:260px; height: 134px;"
+                                    title="Designers, Engineers, Innovators Html Code Example"><img
+                                        alt="Designers, Engineers, Innovators Html Code Example"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/55/02/html-code-5502094.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/5502094/designers-engineers-innovators-html-code"
+                                    title="Designers, Engineers, Innovators Html Code Example">Designers, Engineers,
+                                    Innovators Html Code Example</a>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>More from Split Blocks</h3>
+
+
+
+                    <ul class="thumbnails thumbnails-loading list-unstyled">
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 225px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/4376770/million-visitor-growth-html-code"
+                                    style="width:260px; height: 175px;" title="Million Visitor Growth"><img
+                                        alt="Million Visitor Growth" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/43/76/html-code-4376770.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/4376770/million-visitor-growth-html-code"
+                                    title="Million Visitor Growth">Million Visitor Growth</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 208px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/2260902/solar-solutions-html-code"
+                                    style="width:260px; height: 158px;" title="Solar Solutions"><img
+                                        alt="Solar Solutions" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/22/60/html-code-2260902.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/2260902/solar-solutions-html-code" title="Solar Solutions">Solar
+                                    Solutions</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 155px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/425297/text-and-quote-html-code"
+                                    style="width:260px; height: 105px;" title="Text And Quote"><img alt="Text And Quote"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/42/52/html-code-425297.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/425297/text-and-quote-html-code" title="Text And Quote">Text And Quote</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 201px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3545452/rent-a-car-in-the-usa-html-code"
+                                    style="width:260px; height: 151px;" title="Rent A Car In The USA"><img
+                                        alt="Rent A Car In The USA" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/35/45/html-code-3545452.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3545452/rent-a-car-in-the-usa-html-code" title="Rent A Car In The USA">Rent
+                                    A Car In The USA</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 204px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3425175/busy-life-html-code"
+                                    style="width:260px; height: 154px;" title="Busy Life"><img alt="Busy Life"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/34/25/html-code-3425175.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3425175/busy-life-html-code" title="Busy Life">Busy Life</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 208px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6137906/residential-and-commercial-services-html-code"
+                                    style="width:260px; height: 158px;" title="Residential And Commercial Services"><img
+                                        alt="Residential And Commercial Services" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/61/37/html-code-6137906.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6137906/residential-and-commercial-services-html-code"
+                                    title="Residential And Commercial Services">Residential And Commercial Services</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 195px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6066876/best-properties-in-town-html-code"
+                                    style="width:260px; height: 145px;" title="Best Properties In Town"><img
+                                        alt="Best Properties In Town" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/66/html-code-6066876.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6066876/best-properties-in-town-html-code"
+                                    title="Best Properties In Town">Best Properties In Town</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 185px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3943035/promotion-expert-html-code"
+                                    style="width:260px; height: 135px;" title="Promotion Expert"><img
+                                        alt="Promotion Expert" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/39/43/html-code-3943035.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3943035/promotion-expert-html-code" title="Promotion Expert">Promotion
+                                    Expert</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 256px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3983172/order-pizza-pasta-sandwiches-html-code"
+                                    style="width:260px; height: 206px;" title="Order Pizza, Pasta, Sandwiches"><img
+                                        alt="Order Pizza, Pasta, Sandwiches" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/39/83/html-code-3983172.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3983172/order-pizza-pasta-sandwiches-html-code"
+                                    title="Order Pizza, Pasta, Sandwiches">Order Pizza, Pasta, Sandwiches</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 169px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/2518375/we-create-selling-brands-html-code"
+                                    style="width:260px; height: 119px;"
+                                    title="We Create Selling Brands Html Code Example"><img
+                                        alt="We Create Selling Brands Html Code Example"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/25/18/html-code-2518375.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/2518375/we-create-selling-brands-html-code"
+                                    title="We Create Selling Brands Html Code Example">We Create Selling Brands Html
+                                    Code Example</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item" style="width: 260px; height: 280px;">
+                            <div class="download-block " style="background-color: #363636; ">
+                                <div style="color: #ffffff;" class="download-title">Build Website with no Coding</div>
+                                <a class="btn btn-lg download-btn" href="/download" type="button" rel="nofollow"
+                                    style="background-color: #cd30c0;">Download</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 254px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/2919482/contacts-and-social-icons-html-code"
+                                    style="width:260px; height: 204px;" title="Contacts And Social Icons"><img
+                                        alt="Contacts And Social Icons" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/29/19/html-code-2919482.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/2919482/contacts-and-social-icons-html-code"
+                                    title="Contacts And Social Icons">Contacts And Social Icons</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 194px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3022235/relevant-and-competitive-html-code"
+                                    style="width:260px; height: 144px;" title="Relevant And Competitive"><img
+                                        alt="Relevant And Competitive" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/30/22/html-code-3022235.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3022235/relevant-and-competitive-html-code"
+                                    title="Relevant And Competitive">Relevant And Competitive</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 202px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/4470689/currency-services-html-code"
+                                    style="width:260px; height: 152px;" title="Currency Services"><img
+                                        alt="Currency Services" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/44/70/html-code-4470689.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/4470689/currency-services-html-code" title="Currency Services">Currency
+                                    Services</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 258px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/2452490/best-barbershop-html-code"
+                                    style="width:260px; height: 208px;" title="Best Barbershop"><img
+                                        alt="Best Barbershop" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/24/52/html-code-2452490.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/2452490/best-barbershop-html-code" title="Best Barbershop">Best
+                                    Barbershop</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 207px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3658753/our-personal-trainer-html-code"
+                                    style="width:260px; height: 157px;" title="Our Personal Trainer"><img
+                                        alt="Our Personal Trainer" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/36/58/html-code-3658753.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3658753/our-personal-trainer-html-code" title="Our Personal Trainer">Our
+                                    Personal Trainer</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 199px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3652864/crisis-manager-html-code"
+                                    style="width:260px; height: 149px;" title="Crisis Manager"><img alt="Crisis Manager"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/36/52/html-code-3652864.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3652864/crisis-manager-html-code" title="Crisis Manager">Crisis Manager</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 187px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/4005176/the-best-pizzeria-html-code"
+                                    style="width:260px; height: 137px;" title="The Best Pizzeria"><img
+                                        alt="The Best Pizzeria" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/40/05/html-code-4005176.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/4005176/the-best-pizzeria-html-code" title="The Best Pizzeria">The Best
+                                    Pizzeria</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 223px;">
+                            <div class="page-image">
+                                <a class="thumbnail"
+                                    href="/hc/3381175/handmade-bakery-with-breads-treats-and-savouries-html-code"
+                                    style="width:260px; height: 173px;"
+                                    title="Handmade Bakery With Breads, Treats And Savouries"><img
+                                        alt="Handmade Bakery With Breads, Treats And Savouries"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/33/81/html-code-3381175.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3381175/handmade-bakery-with-breads-treats-and-savouries-html-code"
+                                    title="Handmade Bakery With Breads, Treats And Savouries">Handmade Bakery With
+                                    Breads, Treats And Savouries</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 156px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6012306/split-text-block-html-code"
+                                    style="width:260px; height: 106px;" title="Split Text Block"><img
+                                        alt="Split Text Block" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/12/html-code-6012306.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6012306/split-text-block-html-code" title="Split Text Block">Split Text
+                                    Block</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 219px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6029859/transport-and-logistics-services-html-code"
+                                    style="width:260px; height: 169px;"
+                                    title="Transport And Logistics Services Html Code Example"><img
+                                        alt="Transport And Logistics Services Html Code Example"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/29/html-code-6029859.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6029859/transport-and-logistics-services-html-code"
+                                    title="Transport And Logistics Services Html Code Example">Transport And Logistics
+                                    Services Html Code Example</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item" style="width: 260px; height: 420px;">
+                            <div class="download-block white-block" style="background-color: #ffffff; ">
+                                <img class="lazyload"
+                                    data-src="//images01.nicepage.com/thumbs/a122014e1e8cdf24af08f98c/de4b91b424635284ad7ea46f/templates-small-animation-color_150.gif"
+                                    alt="10 000+ Website Templates" />
+                                <div style="color: #3c3c3c;" class="download-title">10 000+ Website Templates</div>
+                                <a class="btn btn-lg download-btn" href="/download" type="button" rel="nofollow"
+                                    style="background-color: #ec311e;">Download</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 213px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/41721/natural-landscapes-and-islands-html-code"
+                                    style="width:260px; height: 163px;" title="Natural Landscapes And Islands"><img
+                                        alt="Natural Landscapes And Islands" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/41/72/html-code-41721.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/41721/natural-landscapes-and-islands-html-code"
+                                    title="Natural Landscapes And Islands">Natural Landscapes And Islands</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 192px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6001708/houses-from-the-developer-html-code"
+                                    style="width:260px; height: 142px;" title="Houses From The Developer"><img
+                                        alt="Houses From The Developer" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/01/html-code-6001708.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6001708/houses-from-the-developer-html-code"
+                                    title="Houses From The Developer">Houses From The Developer</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 199px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6001749/two-stages-of-preparation-html-code"
+                                    style="width:260px; height: 149px;" title="Two Stages Of Preparation"><img
+                                        alt="Two Stages Of Preparation" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/01/html-code-6001749.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6001749/two-stages-of-preparation-html-code"
+                                    title="Two Stages Of Preparation">Two Stages Of Preparation</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 190px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3877866/amazing-home-repair-professionals-html-code"
+                                    style="width:260px; height: 140px;" title="Amazing Home Repair Professionals"><img
+                                        alt="Amazing Home Repair Professionals" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/38/77/html-code-3877866.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3877866/amazing-home-repair-professionals-html-code"
+                                    title="Amazing Home Repair Professionals">Amazing Home Repair Professionals</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 173px;">
+                            <div class="page-image">
+                                <a class="thumbnail"
+                                    href="/hc/6019062/multidisciplinary-team-of-designers-and-developers-html-code"
+                                    style="width:260px; height: 123px;"
+                                    title="Multidisciplinary Team Of Designers And Developers"><img
+                                        alt="Multidisciplinary Team Of Designers And Developers"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/19/html-code-6019062.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6019062/multidisciplinary-team-of-designers-and-developers-html-code"
+                                    title="Multidisciplinary Team Of Designers And Developers">Multidisciplinary Team Of
+                                    Designers And Developers</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 226px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6016913/scientifically-tested-seo-html-code"
+                                    style="width:260px; height: 176px;" title="Scientifically Tested SEO"><img
+                                        alt="Scientifically Tested SEO" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/16/html-code-6016913.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6016913/scientifically-tested-seo-html-code"
+                                    title="Scientifically Tested SEO">Scientifically Tested SEO</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 200px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/4310806/experience-food-html-code"
+                                    style="width:260px; height: 150px;" title="Experience Food"><img
+                                        alt="Experience Food" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/43/10/html-code-4310806.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/4310806/experience-food-html-code" title="Experience Food">Experience
+                                    Food</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 208px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/4603929/really-incredible-html-code"
+                                    style="width:260px; height: 158px;" title="Really Incredible"><img
+                                        alt="Really Incredible" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/46/03/html-code-4603929.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/4603929/really-incredible-html-code" title="Really Incredible">Really
+                                    Incredible</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 211px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/5673087/various-salads-html-code"
+                                    style="width:260px; height: 161px;" title="Various Salads"><img alt="Various Salads"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/56/73/html-code-5673087.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/5673087/various-salads-html-code" title="Various Salads">Various Salads</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 172px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/5211205/white-bread-html-code"
+                                    style="width:260px; height: 122px;" title="White Bread Html Code Example"><img
+                                        alt="White Bread Html Code Example" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/52/11/html-code-5211205.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/5211205/white-bread-html-code" title="White Bread Html Code Example">White
+                                    Bread Html Code Example</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item" style="width: 260px; height: 280px;">
+                            <div class="download-block " style="background-color: #363636; ">
+                                <div style="color: #ffffff;" class="download-title">Customize Any Template</div>
+                                <a class="btn btn-lg download-btn" href="/download" type="button" rel="nofollow"
+                                    style="background-color: #cd30c0;">Download</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 192px;">
+                            <div class="page-image">
+                                <a class="thumbnail"
+                                    href="/hc/5545574/a-design-and-communication-strategy-studio-html-code"
+                                    style="width:260px; height: 142px;"
+                                    title="A Design And Communication Strategy Studio"><img
+                                        alt="A Design And Communication Strategy Studio"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/55/45/html-code-5545574.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/5545574/a-design-and-communication-strategy-studio-html-code"
+                                    title="A Design And Communication Strategy Studio">A Design And Communication
+                                    Strategy Studio</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 201px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/5709679/business-lunch-discount-html-code"
+                                    style="width:260px; height: 151px;" title="Business Lunch Discount"><img
+                                        alt="Business Lunch Discount" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/57/09/html-code-5709679.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/5709679/business-lunch-discount-html-code"
+                                    title="Business Lunch Discount">Business Lunch Discount</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 187px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3791612/fresh-vegetable-salad-html-code"
+                                    style="width:260px; height: 137px;" title="Fresh Vegetable Salad"><img
+                                        alt="Fresh Vegetable Salad" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/37/91/html-code-3791612.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3791612/fresh-vegetable-salad-html-code"
+                                    title="Fresh Vegetable Salad">Fresh Vegetable Salad</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 202px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3063530/join-the-project-html-code"
+                                    style="width:260px; height: 152px;" title="Join The Project"><img
+                                        alt="Join The Project" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/30/63/html-code-3063530.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3063530/join-the-project-html-code" title="Join The Project">Join The
+                                    Project</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 183px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6082741/healthy-and-tasty-html-code"
+                                    style="width:260px; height: 133px;" title="Healthy And Tasty"><img
+                                        alt="Healthy And Tasty" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/82/html-code-6082741.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6082741/healthy-and-tasty-html-code" title="Healthy And Tasty">Healthy And
+                                    Tasty</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 239px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6081403/online-learning-platform-html-code"
+                                    style="width:260px; height: 189px;" title="Online Learning Platform"><img
+                                        alt="Online Learning Platform" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/81/html-code-6081403.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6081403/online-learning-platform-html-code"
+                                    title="Online Learning Platform">Online Learning Platform</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 202px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/2924488/rapid-development-html-code"
+                                    style="width:260px; height: 152px;" title="Rapid Development"><img
+                                        alt="Rapid Development" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/29/24/html-code-2924488.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/2924488/rapid-development-html-code" title="Rapid Development">Rapid
+                                    Development</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 197px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6001751/light-housekeeping-html-code"
+                                    style="width:260px; height: 147px;" title="Light Housekeeping"><img
+                                        alt="Light Housekeeping" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/01/html-code-6001751.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6001751/light-housekeeping-html-code" title="Light Housekeeping">Light
+                                    Housekeeping</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 223px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3208214/we-see-beautiful-in-simple-html-code"
+                                    style="width:260px; height: 173px;" title="We See Beautiful In Simple"><img
+                                        alt="We See Beautiful In Simple" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/32/08/html-code-3208214.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3208214/we-see-beautiful-in-simple-html-code"
+                                    title="We See Beautiful In Simple">We See Beautiful In Simple</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 203px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6001759/help-around-the-house-html-code"
+                                    style="width:260px; height: 153px;"
+                                    title="Help Around The House Html Code Example"><img
+                                        alt="Help Around The House Html Code Example"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/01/html-code-6001759.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6001759/help-around-the-house-html-code"
+                                    title="Help Around The House Html Code Example">Help Around The House Html Code
+                                    Example</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item" style="width: 260px; height: 460px;">
+                            <div class="download-block white-block" style="background-color: #ffffff; ">
+                                <img class="lazyload"
+                                    data-src="//images01.nicepage.com/thumbs/a122014e1e8cdf24af08f98c/de4b91b424635284ad7ea46f/templates-small-animation-color_150.gif"
+                                    alt="The Biggest Template Collection" />
+                                <div style="color: #3c3c3c;" class="download-title">The Biggest Template Collection
+                                </div>
+                                <a class="btn btn-lg download-btn" href="/download" type="button" rel="nofollow"
+                                    style="background-color: #ec311e;">Download</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 202px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3780570/impressing-ideas-html-code"
+                                    style="width:260px; height: 152px;" title="Impressing Ideas"><img
+                                        alt="Impressing Ideas" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/37/80/html-code-3780570.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3780570/impressing-ideas-html-code" title="Impressing Ideas">Impressing
+                                    Ideas</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 202px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/4593072/projects-delivered-html-code"
+                                    style="width:260px; height: 152px;" title="Projects Delivered"><img
+                                        alt="Projects Delivered" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/45/93/html-code-4593072.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/4593072/projects-delivered-html-code" title="Projects Delivered">Projects
+                                    Delivered</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 200px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/214492/advertising-agency-html-code"
+                                    style="width:260px; height: 150px;" title="Advertising Agency"><img
+                                        alt="Advertising Agency" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/21/44/html-code-214492.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/214492/advertising-agency-html-code" title="Advertising Agency">Advertising
+                                    Agency</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 198px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3329049/hurry-up-to-place-an-order-html-code"
+                                    style="width:260px; height: 148px;" title="Hurry Up To Place An Order"><img
+                                        alt="Hurry Up To Place An Order" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/33/29/html-code-3329049.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3329049/hurry-up-to-place-an-order-html-code"
+                                    title="Hurry Up To Place An Order">Hurry Up To Place An Order</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 193px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/458261/online-testing-platform-html-code"
+                                    style="width:260px; height: 143px;" title="Online Testing Platform"><img
+                                        alt="Online Testing Platform" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/45/82/html-code-458261.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/458261/online-testing-platform-html-code"
+                                    title="Online Testing Platform">Online Testing Platform</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 190px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/3157618/head-welcomes-html-code"
+                                    style="width:260px; height: 140px;" title="Head Welcomes"><img alt="Head Welcomes"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/31/57/html-code-3157618.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/3157618/head-welcomes-html-code" title="Head Welcomes">Head Welcomes</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 196px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/1762813/new-design-project-html-code"
+                                    style="width:260px; height: 146px;" title="New Design Project"><img
+                                        alt="New Design Project" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/17/62/html-code-1762813.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/1762813/new-design-project-html-code" title="New Design Project">New Design
+                                    Project</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 213px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/467680/professional-app-development-html-code"
+                                    style="width:260px; height: 163px;" title="Professional App Development"><img
+                                        alt="Professional App Development" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/46/76/html-code-467680.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/467680/professional-app-development-html-code"
+                                    title="Professional App Development">Professional App Development</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 199px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/6083137/beauty-salon-schedule-html-code"
+                                    style="width:260px; height: 149px;" title="Beauty Salon Schedule"><img
+                                        alt="Beauty Salon Schedule" class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/60/83/html-code-6083137.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/6083137/beauty-salon-schedule-html-code"
+                                    title="Beauty Salon Schedule">Beauty Salon Schedule</a>
+                            </div>
+                        </li>
+                        <li class="thumbnail-item title-one-row" data-height="0" style="width: 260px; height: 214px;">
+                            <div class="page-image">
+                                <a class="thumbnail" href="/hc/494734/i-am-a-web-developer-html-code"
+                                    style="width:260px; height: 164px;"
+                                    title="I Am A Web Developer Html Code Example"><img
+                                        alt="I Am A Web Developer Html Code Example"
+                                        class="media-image lazyload noversion"
+                                        data-src="https://images01.nicepagecdn.com/page/49/47/html-code-494734.jpg"
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="
+                                        style="max-width:100%;" /></a>
+                            </div>
+                            <div class="page-title one-row ">
+                                <a href="/hc/494734/i-am-a-web-developer-html-code"
+                                    title="I Am A Web Developer Html Code Example">I Am A Web Developer Html Code
+                                    Example</a>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+            <br />
+
+            <section id="sec-win-download" style="display: none;">
+                <div class="container-layout">
+                    <img alt="" data-image-width="800" data-image-height="400"
+                        data-src="//csite.nicepage.com/Images/Site/downloadwinchrome.jpg">
+                    <p class="u-text">
+                        You are downloading Nicepage. Problems?&nbsp;<a href="/get/windows/">Click Here</a>
+                    </p>
+                    <p class="u-text">Run Nicepage.exe from the Download Panel</p>
+                </div>
+            </section>
+
+            <section id="sec-mac-download" style="display: none;">
+                <div class="container-layout">
+                    <img alt="" data-src="//csite.nicepage.com/Images/Site/downloadmacsafari.jpg">
+                    <p class="u-text">
+                        You are downloading Nicepage. Problems?&nbsp;<a href="/get/mac/">Click Here</a>
+                    </p>
+                    <p class="u-text">Run Nicepage.dmg from the Download Panel</p>
+                </div>
+            </section>
+
+
+
+        </section>
+        <div id="push"></div>
+    </div>
+
+    <div class="footer">
+
+        <div class="footer-top">
+            <div class="container">
+                <style>
+                    .footer-top a {
+                        color: #ddd !important;
+                        font-size: 16px;
+                    }
+                </style>
+
+                <div class="row">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <h6>Company</h6>
+                        <ul>
+                            <li><a href="/doc/frequently-asked-questions-16656">FAQ</a></li>
+                            <li><a href="/Terms">Terms of Use</a></li>
+                            <li><a href="/Privacy">Privacy Policy</a></li>
+                            <li><a href="/Agreement">License Agreement</a></li>
+                            <li><a href="/About">About Us</a></li>
+                            <li><a href="/partners">Partners</a></li>
+                            <li><a href="/Abuse">Abuse</a></li>
+                            <li><a href="/Forum/Topic/Create">Contact Support</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <h6>Product</h6>
+                        <ul>
+                            <li><a href="/download">Download</a></li>
+                            <li><a href="/features">400+ Features</a></li>
+                            <li><a href="/nicepage-review">Review</a></li>
+                            <li><a href="/affiliates">Affiliates</a></li>
+                            <li><a href="/doc">Documentation</a></li>
+                            <li><a href="/forum">Forum</a></li>
+                            <li><a href="/blog">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <h6>Themes & Templates</h6>
+                        <ul>
+                            <li><a href="/website-templates">Website Templates</a></li>
+                            <li><a href="/wordpress-themes">WordPress Themes</a></li>
+                            <li><a href="/html-templates">HTML Templates</a></li>
+                            <li><a href="/css-templates">CSS Templates</a></li>
+                            <li><a href="/joomla-templates">Joomla Templates</a></li>
+                            <li><a href="/woocommerce-theme">WooCommerce Themes</a></li>
+                            <li><a href="/html5-template">HTML5 Templates</a></li>
+                            <li><a href="/one-page-template">One Page Templates</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <h6>Nicepage</h6>
+                        <ul>
+                            <li><a href="/website-builder">Website Builder</a></li>
+                            <li><a href="/html">HTML Website Builder</a></li>
+                            <li><a href="/wordpress">WordPress Website Builder</a></li>
+                            <li><a href="/joomla">Joomla Page Builder</a></li>
+                            <li><a href="/wysiwyg-html-editor">WYSIWYG HTML Editor</a></li>
+                            <li><a href="/static-site-generator">Static Site Generator</a></li>
+                            <li><a href="/html-code">HTML Code Generator</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <h6>Web Design</h6>
+                        <ul>
+                            <li><a href="/website-design">Website Designs</a></li>
+                            <li><a href="/web-page-design">Web Page Designs</a></li>
+                            <li><a href="/web-design">Web Design</a></li>
+                            <li><a href="/web-page-designer">Web Page Designer</a></li>
+                            <li><a href="/landing-page">Landing Pages</a></li>
+                            <li><a href="/homepage-design">Homepage Designs</a></li>
+                            <li><a href="/website-mockup">Website Mockup</a></li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div id="footer-links" class="footer-inline col-sm-12 pull-right">
+                        <div style="white-space: nowrap; float: left; text-align: left;">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <a href="https://facebook.com/nicepageapp" rel="noreferrer" target="_blank"
+                                        style="margin-right: 10px;">
+                                        <svg x="0px" y="0px" viewBox="0 0 112.2 112.2" style="width: 24px;">
+                                            <circle fill="#3B5998" cx="56.1" cy="56.1" r="55"></circle>
+                                            <path fill="#FFFFFF" d="M73.5,31.6h-9.1c-1.4,0-3.6,0.8-3.6,3.9v8.5h12.6L72,58.3H60.8v40.8H43.9V58.3h-8V43.9h8v-9.2
+        	c0-6.7,3.1-17,17-17h12.5v13.9H73.5z"></path>
+                                        </svg><span
+                                            style="position: relative;top: -7px;margin-left: 5px;">Facebook</span></a>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="https://twitter.com/NicepageApp" rel="noreferrer" target="_blank"
+                                        style="margin-right: 10px;">
+                                        <svg x="0px" y="0px" viewBox="0 0 112.2 112.2" style="width: 24px;">
+                                            <circle fill="#55ACEE" class="st0" cx="56.1" cy="56.1" r="55" />
+                                            <path fill="#FFFFFF" d="M83.8,47.3c0,0.6,0,1.2,0,1.7c0,17.7-13.5,38.2-38.2,38.2C38,87.2,31,85,25,81.2c1,0.1,2.1,0.2,3.2,0.2
+				c6.3,0,12.1-2.1,16.7-5.7c-5.9-0.1-10.8-4-12.5-9.3c0.8,0.2,1.7,0.2,2.5,0.2c1.2,0,2.4-0.2,3.5-0.5c-6.1-1.2-10.8-6.7-10.8-13.1
+				c0-0.1,0-0.1,0-0.2c1.8,1,3.9,1.6,6.1,1.7c-3.6-2.4-6-6.5-6-11.2c0-2.5,0.7-4.8,1.8-6.7c6.6,8.1,16.5,13.5,27.6,14
+				c-0.2-1-0.3-2-0.3-3.1c0-7.4,6-13.4,13.4-13.4c3.9,0,7.3,1.6,9.8,4.2c3.1-0.6,5.9-1.7,8.5-3.3c-1,3.1-3.1,5.8-5.9,7.4
+				c2.7-0.3,5.3-1,7.7-2.1C88.7,43,86.4,45.4,83.8,47.3z" />
+                                        </svg><span
+                                            style="position: relative;top: -7px;margin-left: 5px;">Twitter</span></a>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="https://youtube.com/nicepage?sub_confirmation=1" rel="noreferrer"
+                                        target="_blank" style="margin-right: 10px;">
+                                        <svg x="0px" y="0px" viewBox="0 0 112.2 112.2" style="width: 24px;">
+                                            <circle fill="#D22215" cx="56.1" cy="56.1" r="55"></circle>
+                                            <path fill="#FFFFFF" d="M74.9,33.3H37.3c-7.4,0-13.4,6-13.4,13.4v18.8c0,7.4,6,13.4,13.4,13.4h37.6c7.4,0,13.4-6,13.4-13.4V46.7
+        	C88.3,39.3,82.3,33.3,74.9,33.3L74.9,33.3z M65.9,57l-17.6,8.4c-0.5,0.2-1-0.1-1-0.6V47.5c0-0.5,0.6-0.9,1-0.6l17.6,8.9
+        	C66.4,56,66.4,56.8,65.9,57L65.9,57z"></path>
+                                        </svg><span
+                                            style="position: relative;top: -7px;margin-left: 5px;">YouTube</span></a>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="https://www.pinterest.com/nicepagecom/pins" rel="noreferrer"
+                                        target="_blank" style="margin-right: 10px;">
+                                        <svg x="0px" y="0px" viewBox="0 0 112.2 112.2" style="width: 24px;">
+                                            <circle fill="#CB2027" cx="56.1" cy="56.1" r="55"></circle>
+                                            <path fill="#FFFFFF" d="M61.1,76.9c-4.7-0.3-6.7-2.7-10.3-5c-2,10.7-4.6,20.9-11.9,26.2c-2.2-16.1,3.3-28.2,5.9-41
+        	c-4.4-7.5,0.6-22.5,9.9-18.8c11.6,4.6-10,27.8,4.4,30.7C74.2,72,80.3,42.8,71,33.4C57.5,19.6,31.7,33,34.9,52.6
+        	c0.8,4.8,5.8,6.2,2,12.9c-8.7-1.9-11.2-8.8-10.9-17.8C26.5,32.8,39.3,22.5,52.2,21c16.3-1.9,31.6,5.9,33.7,21.2
+        	C88.2,59.5,78.6,78.2,61.1,76.9z"></path>
+                                        </svg><span
+                                            style="position: relative;top: -7px;margin-left: 5px;">Pinterest</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--    
+<ul class="u-unstyled">
+	<li><a href="/pricing">Premium</a></li>
+	<li>|</li>
+	<li><a href="/affiliates">Affiliates</a></li>
+	<li>|</li>
+	<li><a href="/Forum/Topic/Create?private=1">Contact Support</a></li>
+	<li>|</li>
+	<li><a href="/About">About</a></li>
+	<li>|</li>
+	<li><a href="/Terms">Terms</a></li>
+	<li>|</li>
+	<li><a href="/Privacy">Privacy</a></li>
+	<li>|</li>
+	<li><a href="/Agreement">License</a></li>
+</ul>
+-->
+                        <div class="copy">&copy; 2024 Nicepage Free Website Builder Software - All Rights Reserved</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
