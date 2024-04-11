@@ -1,0 +1,26 @@
+.thank-you-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.thank-you-heading {
+    text-align: center;
+    color: black;
+}
+
+.thank-you-details {
+    margin-top: 20px;
+}
+
+.thank-you-details p {
+    margin-bottom: 10px;
+}
+
+.thank-you-details p strong {
+    font-weight: bold;
+}
