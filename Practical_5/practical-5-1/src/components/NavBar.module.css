@@ -1,0 +1,22 @@
+/* NavBar.module.css */
+.navBar {
+  background-color: #282c34;
+  padding: 1em;
+}
+
+.navList {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.navList li {
+  margin: 0 1em;
+}
+
+.navList li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
