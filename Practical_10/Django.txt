@@ -1,0 +1,9 @@
+python -m venv djangoenv
+djangoenv/Scripts/Activate.ps1
+python -m pip install Django
+django-admin --version
+django-admin startproject my_tennis_club
+cd my_tennis_club/
+python manage.py runserver
+python manage.py startapp members
+
