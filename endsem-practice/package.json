@@ -1,0 +1,27 @@
+{
+    "name": "midsem",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "index": "nodemon index.js",
+        "p1": "nodemon p1.js",
+        "p2": "nodemon p2.js",
+        "p3": "nodemon p3.js",
+        "p4": "nodemon p4.js",
+        "p5": "nodemon p5.js",
+        "p6": "nodemon p6.js",
+        "p7": "nodemon p7.js",
+        "p8": "nodemon p8.js"
+    },
+    "keywords": [],
+    "author": "Harsh Shah",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.20.2",
+        "cookie-parser": "^1.4.6",
+        "express": "^4.18.2",
+        "nodemon": "^3.1.0",
+        "serve-index": "^1.9.1"
+    }
+}
