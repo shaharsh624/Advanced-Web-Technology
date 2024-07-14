@@ -1,0 +1,4 @@
+Task 1: Creating the props template to pass props
+Task 2: Passing information as properties
+Task 3: Create a furniture web page using 
+Task 4: Set default value of props
